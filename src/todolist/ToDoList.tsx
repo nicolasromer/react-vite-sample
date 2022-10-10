@@ -1,7 +1,6 @@
 import { useState, ReactElement, useReducer } from 'react';
 import ToDo from './ToDo.tsx'
 import './ToDoList.css';
-import * as crypto from 'crypto';
 
 
 
@@ -14,9 +13,10 @@ const getTodoListItems = (todos: Array<Todo>) => todos.map(({uid, text}) => (
 	<ToDo key={uid} uid={uid} text={text}/>
 ));
 
-const initialState = () => {text: ""}
+const initialState = () => ({text: ""});
 
 function todoFormReducer(state, action) {
+	console.log(state,action)
 	switch (action.type) {
 		case 'text': 
 			return {...state, text: action.value};
@@ -35,19 +35,21 @@ function ToDoList() {
 	const [formState, dispatch] = useReducer(todoFormReducer, initialState());
 	
 	const addTodo = (todoText: string) => setTodos([...todos, {
-		uid: crypto.randomUUID(),
+		// move to server side
+		uid: window.crypto.randomUUID(),
 		text: todoText,
 	}])
 
 	return (
 		<div className="todo-list">
-			
 			<input
+				className="border-black border-2"
 				value={formState.text}
 				onChange={e => dispatch({type: 'text', value: e.target.value })}
 				type="text"
 			/>
 			<button 
+				disabled={!formState.text}
 				onClick={e => {addTodo(formState.text); dispatch({type: 'submit'})} }
 			>Create</button>
 
