@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>
+      <div className="flex justify-left mb-5">
         <a href="https://vitejs.dev" target="_blank">
           <img src="/vite.svg" className="logo" alt="Vite logo" />
         </a>
@@ -19,11 +19,8 @@ function App() {
 
       <h1 className="font-sans text-3xl">Nick's To-Dos</h1>
       
-      <div className="card">
+      <ToDoList/>
 
-        <ToDoList/>
-
-      </div>
     </div>
   )
 }
