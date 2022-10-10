@@ -8,10 +8,6 @@ interface Todo {
 	text: string;
 }
 
-const getTodoListItems = (todos: Array<Todo>) => todos.map(({uid, text}) => (
-	<ToDo key={uid} uid={uid} text={text}/>
-));
-
 function ToDoList() {
 
 	// todo: persist
@@ -23,13 +19,17 @@ function ToDoList() {
 		text: todoText,
 	}])
 
+	const submit = (formState:{text:string}) => addTodo(formState.text);
+
 	return (
 		<div className="todo-list">
 			
-			<TodoInput submit={(formState:{text:string}) => addTodo(formState.text)}/>
+			<TodoInput submit={submit} />
 
 			<ol>
-				{getTodoListItems(todos)}
+				{todos.map(({uid, text}) => (
+					<ToDo key={uid} uid={uid} text={text}/>
+				))}
 			</ol>
 		</div>
 	);

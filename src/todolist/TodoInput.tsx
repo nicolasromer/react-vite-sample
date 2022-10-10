@@ -3,7 +3,6 @@
 const initialState = () => ({text: ""});
 
 function todoFormReducer(state, action) {
-	console.log(state,action)
 	switch (action.type) {
 		case 'text':
 			return {...state, text: action.value};
@@ -29,6 +28,7 @@ function TodoInput({
 				type="text"
 			/>
 			<button 
+				className="px-3"
 				disabled={!formState.text}
 				onClick={e => {
 					submit(formState);
