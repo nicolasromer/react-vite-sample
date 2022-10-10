@@ -2,14 +2,19 @@ import './ToDo.css';
 
 
 function ToDo({
-	id, text
+	uid, text, remove
 }) {
 	return (
-		<li className="flex justify-left" id={`todo-${id}`}>
+		<li className="flex justify-left" id={`todo-${uid}`}>
 			
 			<p className="grow">{text}</p>
 
-			<button className="text-bold px-3 " type="text">X</button>
+			<button
+			onClick={() =>remove(uid)}
+			label="remove"
+			className="text-bold px-3"
+			type="text"
+			>X</button>
 		</li>
 	);
 }

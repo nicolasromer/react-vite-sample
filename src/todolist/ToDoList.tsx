@@ -19,7 +19,12 @@ function ToDoList() {
 		text: todoText,
 	}])
 
+	const removeTodo = (uid: string) => setTodos(todos.filter(t => t.uid !== uid));
+
 	const submit = (formState:{text:string}) => addTodo(formState.text);
+
+
+
 
 	return (
 		<div className="todo-list">
@@ -28,7 +33,7 @@ function ToDoList() {
 
 			<ol>
 				{todos.map(({uid, text}) => (
-					<ToDo key={uid} uid={uid} text={text}/>
+					<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
 				))}
 			</ol>
 		</div>
