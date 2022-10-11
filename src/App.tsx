@@ -1,27 +1,27 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import ToDoList from './todolist/ToDoList'
+import Button from './todolist/Button'
+import ThemeContext from './ThemeContext'
 import './App.css'
 
+
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [theme, setTheme] = useState('light');
+  const toggleTheme = () => setTheme(theme === 'light' ? 'dark' : 'light');
 
   return (
-    <div className="App">
-      <div className="flex justify-left mb-5">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <ThemeContext.Provider value={theme}>
+      <div className={`App theme-${theme}`}>
+          
+          <Button handleClick={toggleTheme} type="primary" text="Toggle Theme" />
+
+          <h1 className="font-sans text-3xl py-3">Nick's To-Dos</h1>
+          
+          <ToDoList/>
+
       </div>
-
-      <h1 className="font-sans text-3xl">Nick's To-Dos</h1>
-      
-      <ToDoList/>
-
-    </div>
+    </ThemeContext.Provider>
   )
 }
 

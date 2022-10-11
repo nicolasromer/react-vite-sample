@@ -28,15 +28,16 @@ function ToDoList() {
 	return (
 		<div className="todo-list">
 			
-			<ToDoInput submit={submit} />
+			
+				<ToDoInput submit={submit} />
 
-			<ol>
-				{todos.length
-				 ? todos.map(({uid, text}) => (
-						<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
-					))
-				 : <p className="pt-5">Nothing to do!</p>}
-			</ol>
+				<ol>
+					{todos.length
+					 ? todos.map(({uid, text}) => (
+							<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
+						))
+					 : <p className="pt-5">Nothing to do!</p>}
+				</ol>
 		</div>
 	);
 }

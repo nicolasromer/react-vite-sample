@@ -8,3 +8,7 @@
 .todo-item p {
 	flex-grow:  1;
 }
+
+.todo-item.theme-dark {
+	color:  white;
+}

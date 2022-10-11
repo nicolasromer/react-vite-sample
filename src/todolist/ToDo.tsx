@@ -1,3 +1,5 @@
+import {useContext} from 'react'
+import ThemeContext from '../ThemeContext'
 import Button from './Button';
 import './ToDo.css';
 
@@ -5,8 +7,11 @@ import './ToDo.css';
 function ToDo({
 	uid, text, remove
 }) {
+
+	const theme = useContext(ThemeContext);
+
 	return (
-		<li className="todo-item" id={`todo-${uid}`}>
+		<li className={`todo-item theme-${theme}`} id={`todo-${uid}`}>
 			
 			<p className="grow">{text}</p>
 
