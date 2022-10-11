@@ -1,4 +1,5 @@
  import {useReducer, ReactElement} from 'react';
+ import './ToDoInput.css'
 
 const initialState = () => ({text: ""});
 
@@ -13,14 +14,23 @@ function todoFormReducer(state, action) {
 	}
 }
 
-function TodoInput({
+function ToDoInput({
  	submit
  }): ReactElement {
 
 	const [formState, dispatch] = useReducer(todoFormReducer, initialState());
 
+	const onSubmit = e => {
+					e.preventDefault();
+					submit(formState);
+					dispatch({type: 'submit'})
+				}
+
  	return (
- 		<div id="new-todo">
+ 		<form
+ 			id="new-todo-form"
+ 			onSubmit={onSubmit}
+ 		>
 			<input
 				className="border-black border-2"
 				value={formState.text}
@@ -30,13 +40,10 @@ function TodoInput({
 			<button 
 				className="px-3"
 				disabled={!formState.text}
-				onClick={e => {
-					submit(formState);
-					dispatch({type: 'submit'})
-				}}
+				type="submit"
 			>Create</button>
-		</div>
+		</form>
 	);
  }
 
- export default TodoInput;
+ export default ToDoInput;

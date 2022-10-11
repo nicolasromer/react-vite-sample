@@ -1,0 +1,10 @@
+.todo-item {
+	display:  flex;
+	list-style-type: circle;
+}
+
+
+
+.todo-item p {
+	flex-grow:  1;
+}

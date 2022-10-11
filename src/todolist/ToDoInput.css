@@ -1,0 +1,7 @@
+#new-todo-form {
+	@apply mb-3
+}
+
+#new-todo-form input {
+	@apply rounded-md
+}

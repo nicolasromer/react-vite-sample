@@ -1,6 +1,6 @@
 import { useState, ReactElement, useReducer } from 'react';
 import ToDo from './ToDo'
-import TodoInput from './TodoInput'
+import ToDoInput from './ToDoInput'
 import './ToDoList.css';
 
 interface Todo {
@@ -25,16 +25,17 @@ function ToDoList() {
 
 
 
-
 	return (
 		<div className="todo-list">
 			
-			<TodoInput submit={submit} />
+			<ToDoInput submit={submit} />
 
 			<ol>
-				{todos.map(({uid, text}) => (
-					<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
-				))}
+				{todos.length
+				 ? todos.map(({uid, text}) => (
+						<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
+					))
+				 : <p className="pt-5">Nothing to do!</p>}
 			</ol>
 		</div>
 	);
