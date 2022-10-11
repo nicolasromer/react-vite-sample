@@ -1,3 +1,4 @@
+import Button from './Button';
 import './ToDo.css';
 
 
@@ -9,11 +10,12 @@ function ToDo({
 			
 			<p className="grow">{text}</p>
 
-			<button
-			onClick={() =>remove(uid)}
+			<Button
+			handleClick={() =>remove(uid)}
 			label="remove"
-			type="text"
-			>X</button>
+			text="done"
+			type="primary"
+			/>
 		</li>
 	);
 }
