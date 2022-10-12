@@ -8,22 +8,31 @@ interface Todo {
 	text: string;
 }
 
+const getUid = () => window.crypto.randomUUID();
+
+const todoReducer = (state, action) => {
+	switch (action.type) {
+		case 'add': 
+			return [...state, {
+				uid: getUid(),
+				text: action.text
+			}]
+		case 'remove': 
+			return state.filter(t=>t.uid !== action.uid);
+	}
+}
+
+const getInitialState = () => []
+
 function ToDoList() {
 
-	// todo: persist
-	const [todos, setTodos] = useState<Array<Todo>>([]);
+	const [state, dispatch] = useReducer(todoReducer, getInitialState());
 	
-	const addTodo = (todoText: string) => setTodos([...todos, {
-		// move to server side
-		uid: window.crypto.randomUUID(),
-		text: todoText,
-	}])
-
-	const removeTodo = (uid: string) => setTodos(todos.filter(t => t.uid !== uid));
-
+	const addTodo = 	(text: string) => dispatch({ type: 'add', text });
+	const removeTodo = 	(uid: string) => dispatch({ type: 'remove', uid });
 	const submit = (formState:{text:string}) => addTodo(formState.text);
 
-
+	
 
 	return (
 		<div className="todo-list">
@@ -32,9 +41,14 @@ function ToDoList() {
 				<ToDoInput submit={submit} />
 
 				<ol>
-					{todos.length
-					 ? todos.map(({uid, text}) => (
-							<ToDo key={uid} uid={uid} text={text} remove={removeTodo}/>
+					{state.length
+					 ? state.map(({uid, text}) => (
+							<ToDo 
+								key={uid} 
+								uid={uid}
+								text={text}
+								remove={removeTodo}
+							/>
 						))
 					 : <p className="pt-5">Nothing to do!</p>}
 				</ol>
